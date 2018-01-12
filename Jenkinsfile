@@ -11,6 +11,8 @@ node {
     registryHost = "reg.linuxtag.cn/devops/"
     imageName = "${registryHost}${appName}:${tag}"
     env.BUILDIMG=imageName
+    stage "docker-login"
+       sh "docker login -p 'Llb1020.' -u devops  reg.linuxtag.cn"
 
     stage "Build"
     
