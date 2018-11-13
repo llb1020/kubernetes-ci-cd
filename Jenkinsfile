@@ -8,11 +8,11 @@ node {
 
     tag = readFile('commit-id').replace("\n", "").replace("\r", "")
     appName = "hello-kenzan"
-    registryHost = "reg.linuxtag.cn/devops/"
+    registryHost = "harbor.lvshou.com/cicd/"
     imageName = "${registryHost}${appName}:${tag}"
     env.BUILDIMG=imageName
     stage "docker-login"
-       sh "docker login -p 'Llb1020.' -u devops  reg.linuxtag.cn"
+       sh "docker login -p '!@Q3wa$ESZ' -u devops  harbor.lvshou.com"
 
     stage "Build"
     
@@ -24,7 +24,7 @@ node {
 
     stage "Deploy"
 
-        sh "sed 's#reg.linuxtag.cn/devops/hello-kenzan:latest#'$BUILDIMG'#' applications/hello-kenzan/k8s/deployment.yaml | kubectl apply  -f -"
+        sh "sed 's#harbor.lvshou.com/cicd/hello-kenzan:latest#'$BUILDIMG'#' applications/hello-kenzan/k8s/deployment.yaml | kubectl apply  -f -"
         sh "kubectl rollout status deployment/hello-kenzan"
 
 }
